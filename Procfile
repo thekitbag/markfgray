@@ -1,1 +1,1 @@
-web: flask db upgrade; gunicorn hedgehog:app
+web: flask db upgrade; gunicorn markfgray:app
