@@ -1,1 +1,1 @@
-web: flask db upgrade; gunicorn markfgray:app
+web: flask db upgrade; gunicorn app:app
