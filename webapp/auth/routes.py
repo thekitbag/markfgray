@@ -1,4 +1,6 @@
-from flask import render_template
+from flask import render_template, request, url_for, redirect
+from flask_login import current_user, login_user
+from webapp.models import User
 from webapp.auth import bp
 from webapp.auth.forms import RegistrationForm, LoginForm
 
@@ -32,7 +34,7 @@ def login():
 		login_user(user)
 		next_page = request.args.get('next')
 		if not next_page or url_parse(next_page).netloc != '':
-			next_page = url_for('main.index')
+			next_page = url_for('admin.admin')
 		return redirect(next_page)
 	else:
 		return render_template('login.html', form=form)
