@@ -30,3 +30,8 @@ class TestConfig(Config):
     SERVER_NAME = 'localhost.localdomain'
     MAX_POSTS_PER_DAY = 1000
     MAX_POSTS_PER_QUARTER = 1000
+    MONGODB_SETTINGS = {
+    'db': 'test_markfaradaygray',
+    'host': 'localhost',
+    'port': 27017
+}
