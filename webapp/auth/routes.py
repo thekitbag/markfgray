@@ -1,4 +1,4 @@
-from flask import render_template, request, url_for, redirect, flash
+from flask import render_template, request, url_for, redirect, flash, jsonify
 from flask_login import current_user, login_user
 from webapp.models import User
 from webapp.auth import bp
