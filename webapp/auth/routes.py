@@ -30,7 +30,7 @@ def login():
 
 		if user is None or not user.check_password(form.password.data):
 			flash('Invalid login details')
-			return redirect(url_for('admin.login'))
+			return redirect(url_for('auth.login'))
 		login_user(user)
 		next_page = request.args.get('next')
 		if not next_page or url_parse(next_page).netloc != '':
