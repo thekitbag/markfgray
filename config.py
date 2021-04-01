@@ -22,6 +22,7 @@ class ProductionConfig(Config):
     REMEMBER_COOKIE_SECURE = True
     SESSION_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_HTTPONLY = True
+    MONGODB_HOST = os.environ.get('MONGODB_URI')
 
 class TestConfig(Config):
     TESTING = True
