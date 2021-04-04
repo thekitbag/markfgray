@@ -6,27 +6,27 @@ from webapp.main import bp
 @bp.route('/')
 @bp.route('/index')
 def index():
-	return render_template('index.html', title='Home')
+	return render_template('main/index.html', title='Home')
 
 @bp.route('/career')
 def career():
-	return render_template('career.html', title='Career Journey')
+	return render_template('main/career.html', title='Career Journey')
 
 @bp.route('/skills')
 def skills():
-	return render_template('skills.html', title='Skills')
+	return render_template('main/skills.html', title='Skills')
 
 @bp.route('/tools')
 def tools():
-	return render_template('tools.html', title='Tools')
+	return render_template('main/tools.html', title='Tools')
 
 @bp.route('/personal')
 def personal():
-	return render_template('personal.html', title='Away From Work')
+	return render_template('main/personal.html', title='Away From Work')
 
 @bp.route('/blog')
 def blog():
-	return render_template('blog.html', title='Blog')
+	return render_template('main/blog.html', title='Blog')
 
 
 

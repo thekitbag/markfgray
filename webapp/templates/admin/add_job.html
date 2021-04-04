@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+
+<div class="container">
+	<form action="{{url_for('admin.add_job')}}" method="post" class="form" role="form">
+		{{ form.hidden_tag() }}
+	 <d1>
+		{{ wtf.form_field(form.company, class='form-control') }}
+			{% for error in form.company.errors %}
+			<div class="alert alert-danger" role="alert">{{ error }}</div>
+			{% endfor %}
+		{{ wtf.form_field(form.start_date, class='form-control') }}
+			{% for error in form.start_date.errors %}
+			<div class="alert alert-danger" role="alert">{{ error }}</div>
+			{% endfor %}
+		{{ wtf.form_field(form.end_date, class='form-control') }}
+			{% for error in form.end_date.errors %}
+			<div class="alert alert-danger" role="alert">{{ error }}</div>
+			{% endfor %}
+		{{ wtf.form_field(form.job_title, class='form-control') }}
+			{% for error in form.job_title.errors %}
+			<div class="alert alert-danger" role="alert">{{ error }}</div>
+			{% endfor %}
+		{{ wtf.form_field(form.description, class='form-control') }}
+			{% for error in form.description.errors %}
+			<div class="alert alert-danger" role="alert">{{ error }}</div>
+			{% endfor %}
+	 </d1>
+	 <a cat="Login" title="Login"><input type=submit class='btn btn-dark text-white btn-block mt-2'></a>
+	</form>
+</div>
+{% endblock %}

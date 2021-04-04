@@ -45,6 +45,7 @@ def test_admin_page(test_client):
 	assert b">Register</a>" in response.data
 	assert b">Login</a>" in response.data
 	assert b">New Blog Post</a>" in response.data
+	assert b">Edit Jobs</a>" in response.data
 
 def test_blog_page(test_client):
 	"""

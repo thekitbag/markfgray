@@ -36,15 +36,6 @@ def test_client():
         with flask_app.app_context():
             yield testing_client  # this is where the testing happens!
 
-@pytest.fixture(scope='function')
-def function_test_client():
-    flask_app = create_app(config.TestConfig)
-
-    # Create a test client using the Flask application configured for testing
-    with flask_app.test_client() as testing_client:
-        # Establish an application context
-        with flask_app.app_context():
-            yield testing_client  # this is where the testing happens!
 
 
 
@@ -61,5 +52,23 @@ def function_test_client():
     yield testing_client  # this is where the testing happens!
 
     ctx.pop()
+    User.objects({}).delete()
+
+@pytest.fixture(scope='function')
+def logged_in_client(new_user):
+    flask_app = create_app(config.TestConfig)
+    testing_client = flask_app.test_client()
+
+    # Establish an application context before running the tests.
+    ctx = flask_app.app_context()
+    ctx.push()
+
+    response = testing_client.post('/auth/login',
+                                        data=dict(username='freddy function user', password='password1'), follow_redirects=True)
+
+    yield testing_client  # this is where the testing happens!
+
+    ctx.pop()
+    #User.objects({}).delete()
     
 

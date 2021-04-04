@@ -1,12 +1,12 @@
 from flask import render_template, request, url_for, redirect, flash, jsonify
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, logout_user
 from webapp.models import User
 from webapp.auth import bp
 from webapp.auth.forms import RegistrationForm, LoginForm
 
 @bp.route('/admin')
 def admin():
-	return render_template('admin.html', title='Admin')
+	return render_template('auth/admin.html', title='Admin')
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
@@ -16,9 +16,10 @@ def register():
 		user = User(username=form.username.data.lower())
 		user.set_password(form.password.data)
 		user.save()
-		return jsonify(user.to_json())
+		login_user(user)
+		return redirect(url_for('admin.admin'))
 	else:
-		return render_template('register.html', form=form)
+		return render_template('auth/register.html', form=form)
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -37,7 +38,7 @@ def login():
 			next_page = url_for('admin.admin')
 		return redirect(next_page)
 	else:
-		return render_template('login.html', form=form)
+		return render_template('auth/login.html', form=form)
 
 @bp.route('/logout', methods=['GET'])
 def logout():
