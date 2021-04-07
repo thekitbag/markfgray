@@ -43,7 +43,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a class="nav-item nav-link" href="{{ url_for('main.personal') }}">Away From Work</a>
       <a class="nav-item nav-link" href="{{ url_for('main.blog') }}">Blog</a>
       {% if current_user.is_authenticated %}
-      <a class="nav-item nav-link" href="{{ url_for('admin.new_blog_post') }}">New Blog Post</a>
+      <a class="nav-item nav-link" href="{{ url_for('admin.admin') }}">Admin</a>
       {% endif %}
     </div>
   </div>

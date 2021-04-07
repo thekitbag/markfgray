@@ -1,7 +1,8 @@
 import pytest 
 import config
+from datetime import datetime
 from flask.testing import FlaskClient
-from webapp.models import User
+from webapp.models import User, Job
 from webapp import create_app, db
 
 
@@ -54,8 +55,24 @@ def function_test_client():
     ctx.pop()
     User.objects({}).delete()
 
+
 @pytest.fixture(scope='function')
-def logged_in_client(new_user):
+def user_with_job():
+    u = User(username='mark')
+    u.set_password('123')
+    j = Job()
+    j.company = 'marketly'
+    j.start_date = datetime(2018, 1, 1, 0, 0 ,0)
+    j.end_date =  datetime(2020,1,1,0,0,0)
+    j.job_title = 'CEO'
+    j.description = 'I ran the comapny from day to day and grew it by 1000% in the first year'
+    u.add_job(j)
+    u.save()
+    yield u
+    u.delete()
+
+@pytest.fixture(scope='function')
+def logged_in_client(user_with_job):
     flask_app = create_app(config.TestConfig)
     testing_client = flask_app.test_client()
 
@@ -64,11 +81,10 @@ def logged_in_client(new_user):
     ctx.push()
 
     response = testing_client.post('/auth/login',
-                                        data=dict(username='freddy function user', password='password1'), follow_redirects=True)
+                                        data=dict(username='mark', password='123'), follow_redirects=True)
 
     yield testing_client  # this is where the testing happens!
 
     ctx.pop()
-    #User.objects({}).delete()
     
 

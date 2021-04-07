@@ -2,7 +2,7 @@
 
 import os
 from webapp import create_app, db
-from webapp.models import User
+from webapp.models import User, Job
 import config
 
 if os.environ['FLASK_ENV'] == 'development':
@@ -18,6 +18,7 @@ def make_shell_context():
     return {
     'db': db, 
     'User': User, 
-    'u1':User(username='mark')
+    'u1':User(username='mark'),
+    'job': Job()
 
     }

@@ -22,7 +22,6 @@ def test_new_job(new_user):
 	THEN the fields in that job should be created correctly and accessible through the users jobs field
 	"""
 	job = Job()
-	job.user = new_user
 	job.company = 'Google'
 	job.start_date = datetime(1970, 1, 1, 0, 0 ,0)
 	job.end_date = datetime(1987, 5, 5, 5, 5, 5, 5)
@@ -38,7 +37,49 @@ def test_new_job(new_user):
 	assert new_user.jobs[0].job_title == 'CEO'
 	assert new_user.jobs[0].description == "As CEO I dominated the industry, growing revenue by 100% every year and scaling \
 					the company to 100,000 employees"
-	
+
+def test_add_job(new_user):
+	"""
+	GIVEN a user and a job
+	WHEN the add job method is called for that job
+	THEN the job is in the users jobs attribute
+	"""
+	j = Job()
+	new_user.add_job(j)
+	assert j in new_user.jobs
+	assert j.oid == new_user.jobs[0].oid
+
+def test_add_two_jobs(new_user):
+	"""
+	GIVEN a user
+	WHEN that user adds two jobs
+	THEN both jobs should appear in the users jobs attribute and both jobs IDs should be unique
+	"""
+	j = Job()
+	new_user.add_job(j)
+	j2 = Job()
+	new_user.add_job(j2)
+	assert j in new_user.jobs
+	assert j2 in new_user.jobs
+	assert j.oid == new_user.jobs[0].oid
+	assert j2.oid == new_user.jobs[1].oid
+	assert j.oid != j2.oid
+
+def test_remove_job(user_with_job):
+	"""
+	GIVEN a user with a job
+	WHEN the remove job method is called for that job
+	THEN that job should no longer be in the user's jobs
+	"""
+	assert len(user_with_job.jobs) == 1
+	job = user_with_job.jobs[0]
+	user_with_job.remove_job(job)
+	assert len(user_with_job.jobs) == 0
+
+
+
+
+
 
 
 

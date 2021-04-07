@@ -32,8 +32,19 @@ def add_job():
 			job.end_date = form.end_date.data
 			job.job_title = form.job_title.data
 			job.description = form.description.data
-			current_user.jobs.append(job)
+			current_user.add_job(job)
 			current_user.save()
 			return redirect(url_for('admin.jobs'))
 	
 	return render_template('admin/add_job.html', form=form)
+
+@bp.route('/remove_job', methods=['POST'])
+@login_required
+def remove_job():
+	job_id = request.args.get('job_id')
+
+	job = [job for job in current_user.jobs if str(job.oid) == str(job_id)]
+
+
+	current_user.remove_job(job[0])
+	return render_template('admin/jobs.html')

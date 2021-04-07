@@ -8,11 +8,11 @@
 <h1>Jobs</h1>
 {% if jobs %}
 <h4>Your jobs are below, click on one to edit description</h4>
-{% for job in jobs %}
-	<h3>{{job.company}}</h3>
-	<h4>{{job.job_title}}</h4>
-	<p>{{job.description}}</p>
-{% endfor %}
+<div class="row mt-2">
+	{% for job in jobs %}
+		{% include 'admin/_job.html' %}
+	{% endfor %}
+</div>
 {% else %}
 <h4>You have no jobs saved</h4>
 {% endif %}

@@ -1,12 +1,15 @@
 from webapp import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from bson.objectid import ObjectId
 
 @login.user_loader
 def load_user(id):
 	return User.objects(id=id).first()
 
 class Job(db.EmbeddedDocument):
+	oid = db.ObjectIdField(required=True, default=ObjectId,
+                    unique=True, primary_key=True, sparse=True)
 	company = db.StringField()
 	start_date = db.DateTimeField()
 	end_date = db.DateTimeField()
@@ -27,4 +30,10 @@ class User(db.Document, UserMixin):
 
 	def check_password(self, password):
 		return check_password_hash(self.pwd_hash, password)
+
+	def add_job(self, job):
+		self.jobs.append(job)
+
+	def remove_job(self, job):
+		self.jobs.remove(job)
 
