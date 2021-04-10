@@ -1,6 +1,3 @@
-from webapp import create_app
-import config
-
 
 def test_home_page(test_client):
 	"""

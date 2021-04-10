@@ -42,9 +42,9 @@ def add_job():
 @login_required
 def remove_job():
 	job_id = request.args.get('job_id')
-
+	print(job_id)
 	job = [job for job in current_user.jobs if str(job.oid) == str(job_id)]
-
-
+	print(job[0].oid)
 	current_user.remove_job(job[0])
-	return render_template('admin/jobs.html')
+	current_user.save()
+	return redirect(url_for('admin.jobs'))

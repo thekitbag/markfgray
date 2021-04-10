@@ -15,6 +15,7 @@ class DevelopmentConfig(Config):
     'host': 'localhost',
     'port': 27017
 }
+    USERNAME = 'mfg'
 
 class ProductionConfig(Config):
     DEBUG = False
@@ -23,6 +24,7 @@ class ProductionConfig(Config):
     SESSION_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_HTTPONLY = True
     MONGODB_HOST = os.environ.get('MONGODB_URI')
+    USERNAME = os.environ.get('USERNAME') or 'mfg'
 
 class TestConfig(Config):
     TESTING = True
@@ -36,3 +38,4 @@ class TestConfig(Config):
     'host': 'localhost',
     'port': 27017
 }
+    USERNAME = 'mfg'

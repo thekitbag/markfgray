@@ -1,11 +1,60 @@
 {% extends "base.html" %}
-
 {% block moreScripts %}
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/career.css') }}">
+<script src="../static/js/career.js"></script>
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=font1|font2|etc" type="text/css">
+<script src="https://kit.fontawesome.com/2c7fc28a2f.js"></script>
 {% endblock moreScripts %}
 
 {% block app_content %}
 
-<h1>Career Journey</h1>
-<h4>Coming soon...</h4>
+
+<div class="container-fluid">
+	<div id="carouselExample" class="carouselPrograms carousel slide" data-ride="carousel" data-interval="false">
+		<div class="carousel-inner row w-100 mx-auto" role="listbox">
+			<div class="carousel-item col-md-4  active">
+				   <div class="panel panel-default">
+					  <div class="panel-thumbnail">
+						<a href="#" title="image {{num}}" class="thumb">
+						  <div class="container border bg-dark">
+							<h4>{{jobs[0].job_title}}</h4>
+							<h5>{{jobs[0].company}}</h5>
+							<h6>{{jobs[0].start_date.date()}}</h6>
+						  </div>
+						</a>
+					  </div>
+					</div>
+				</div> 
+			{% for job in jobs[2:] %}
+				<div class="carousel-item col-md-4">
+				   <div class="panel panel-default">
+					  <div class="panel-thumbnail">
+						<a href="#" title="image {{num}}" class="thumb">
+						  <div class="container border bg-dark">
+							<h4>{{job.job_title}}</h4>
+							<h5>{{job.company}}</h5>
+							<h6>{{job.start_date.date()}}</h6>
+						  </div>
+						</a>
+					  </div>
+					</div>
+				</div> 
+			{% endfor %}     
+		</div>
+		<a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+	</div>
+</div>
+
+
+
+
+
 
 {% endblock %}

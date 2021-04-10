@@ -1,5 +1,3 @@
-#from webapp import app
-
 import os
 from webapp import create_app, db
 from webapp.models import User, Job

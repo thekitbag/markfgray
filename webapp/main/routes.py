@@ -1,7 +1,7 @@
 from flask import current_app, render_template, url_for, redirect, flash, jsonify, request
-from flask_login import current_user, login_user, logout_user, login_required
 from webapp.models import User
 from webapp.main import bp
+import config 
 
 @bp.route('/')
 @bp.route('/index')
@@ -10,7 +10,10 @@ def index():
 
 @bp.route('/career')
 def career():
-	return render_template('main/career.html', title='Career Journey')
+	username = current_app.config['USERNAME']
+	user = User.objects(username=username).first()
+	jobs = user.jobs
+	return render_template('main/career.html', title='Career Journey', jobs=jobs)
 
 @bp.route('/skills')
 def skills():
