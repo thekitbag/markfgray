@@ -18,18 +18,6 @@ def test_home_page(test_client):
 	assert b"<h4>Coming soon...</h4>" in response.data
 	assert b'<nav class="navbar navbar-expand-lg navbar-light bg-light">' in response.data
 
-def test_career_page(test_client):
-	"""
-	GIVEN a Flask application configured for testing
-	WHEN I try to load the career page
-	THEN I should see the right content
-	"""
-	
-	response = test_client.get('/career')
-	assert response.status_code == 200
-	assert b"<h1>Career Journey</h1>" in response.data
-	assert b"<h4>Coming soon...</h4>" in response.data
-
 def test_admin_page(test_client):
 	"""
 	GIVEN a Flask application configured for testing

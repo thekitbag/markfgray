@@ -38,4 +38,4 @@ class TestConfig(Config):
     'host': 'localhost',
     'port': 27017
 }
-    USERNAME = 'mfg'
+    USERNAME = 'mark'

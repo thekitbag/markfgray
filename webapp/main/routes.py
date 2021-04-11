@@ -13,6 +13,7 @@ def career():
 	username = current_app.config['USERNAME']
 	user = User.objects(username=username).first()
 	jobs = user.jobs
+	jobs.sort(key=lambda x: x.start_date, reverse=True)
 	return render_template('main/career.html', title='Career Journey', jobs=jobs)
 
 @bp.route('/skills')
