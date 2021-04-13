@@ -1,12 +1,12 @@
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title">{{job.company}}</h5>
+    <h5 class="card-title">{{job.company.name}}</h5>
     <h5 class="card-title">{{job.job_title}}</h5>
     <p class="card-text">{{job.description}}</p>
-    <a href="#" class="btn btn-primary">Edit</a>
+    <a href="/edit_job/{{job.oid}}" class="btn btn-primary">Edit</a>
     <form action="/remove_job?job_id={{job.oid}}" method="post">
 	    <input type="submit" value="Remove" class="btn btn-danger">
-	</form>
+	  </form>
   </div>
 </div>
 

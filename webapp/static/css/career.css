@@ -1,9 +1,19 @@
 .job-tile {
-    height:180px;
+    height:200px;
     border-radius: 10%;
     margin-right: 12px;
     margin-bottom: 24px;
     min-width: 160px;
+    box-shadow: 10px 10px 8px #888888;
+
+}
+
+.job-tile:hover {
+    cursor: pointer;
+}
+
+.job-tile:active {
+    box-shadow: none;
 }
 
 .job-details {

@@ -2,7 +2,7 @@ import pytest
 import config
 from datetime import datetime
 from flask.testing import FlaskClient
-from webapp.models import User, Job
+from webapp.models import User, Job, Company
 from webapp import create_app, db
 
 
@@ -61,7 +61,12 @@ def user_with_job():
     u = User(username='mark')
     u.set_password('123')
     j = Job()
-    j.company = 'marketly'
+    c = Company()
+    c.name = 'Marketly'
+    c.description = 'Online marketing company'
+    c.img_url = 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png'
+    c.save()
+    j.company = c
     j.start_date = datetime(2018, 1, 1, 0, 0 ,0)
     j.end_date =  datetime(2020,1,1,0,0,0)
     j.job_title = 'CEO'

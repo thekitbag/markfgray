@@ -42,7 +42,7 @@ def test_edit_jobs_page(function_test_client, logged_in_client):
 		response2 = logged_in_client.get('/jobs')
 		assert response2.status_code == 200
 		assert b"Add Job</a>" in response2.data
-		assert b"marketly" in response2.data
+		assert b"Marketly" in response2.data
 
 def test_add_job_page(function_test_client, new_user):
 	"""

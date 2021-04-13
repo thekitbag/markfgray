@@ -7,14 +7,21 @@ from bson.objectid import ObjectId
 def load_user(id):
 	return User.objects(id=id).first()
 
+class Company(db.Document):
+	name = db.StringField()
+	description = db.StringField()
+	img_url = db.StringField()
+
+
 class Job(db.EmbeddedDocument):
 	oid = db.ObjectIdField(required=True, default=ObjectId,
                     unique=True, primary_key=True, sparse=True)
-	company = db.StringField()
+	company = db.ReferenceField(Company)
 	start_date = db.DateTimeField()
 	end_date = db.DateTimeField()
 	job_title = db.StringField()
 	description = db.StringField()
+	achievements = db.StringField()
 
 class User(db.Document, UserMixin):
 	username = db.StringField(required=True, unique=True)
@@ -36,4 +43,7 @@ class User(db.Document, UserMixin):
 
 	def remove_job(self, job):
 		self.jobs.remove(job)
+
+
+
 
