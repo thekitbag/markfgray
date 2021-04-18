@@ -28,6 +28,10 @@
 			{% for error in form.description.errors %}
 			<div class="alert alert-danger" role="alert">{{ error }}</div>
 			{% endfor %}
+		{{ wtf.form_field(form.achievements, class='form-control') }}
+			{% for error in form.achievements.errors %}
+			<div class="alert alert-danger" role="alert">{{ error }}</div>
+			{% endfor %}
 	 </d1>
 	 <a cat="Login" title="Login"><input type=submit class='btn btn-dark text-white btn-block mt-2'></a>
 	</form>

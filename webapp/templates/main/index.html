@@ -1,11 +1,41 @@
 {% extends "base.html" %}
 
 {% block moreScripts %}
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/index.css') }}">
 {% endblock moreScripts %}
 
 {% block app_content %}
 
-<h1>Home</h1>
-<h4>Coming soon...</h4>
-
+<div class="container central-panel mx-auto">
+	<div class="row">
+		<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+			<div class="pic-container mx-auto">
+				<img src="https://media-exp1.licdn.com/dms/image/C5603AQFlFZxhzKafJQ/profile-displayphoto-shrink_400_400/0/1582040138059?e=1623888000&v=beta&t=7LjZgfVpKqMLOOQ9zmDwB8JayNgbzvRvS3G3XtUqoPk" class="pic">
+			</div>
+			<div class="details container mx-auto">
+				<div class="name">Mark Gray</div>
+				<div class="summary">Senior Product Manager in Southampton, UK</div>
+			</div>
+			<div class="container profiles-container">
+				<a href="https://www.linkedin.com/in/mark-gray-79b40834/" title="LinkedIn" class="btn btn-linkedin btn-lg" target="_blank"><i class="fa fa-linkedin fa-fw"></i> LinkedIn</a>
+			</div>
+			<div class="container profiles-container">
+				<a href="/contact" class="btn btn-dark" role="button">Contact Me</a>
+			</div>		
+		</div>
+		<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+			<div class="about-me">About Me</div>
+			<div class="container about-me-blurb">
+				<p>I am a digital product manager with over 8 years of experience working with scrum teams in B2B and B2C companies.</p>
+				<p>I build this website as a place to write about my career and the world of product management but primarily as a playground for testing out my development and design skills. If you are from a tech background, bear in mind that I am not. If you are from a design background, I can only apologise.</p>
+			</div>
+			<div class="cta">
+				<a href="https://github.com/thekitbag/markfgray" target="_blank"><button type="button" class="btn btn-outline-info cta-button">View Code on Github</button></a>
+			</div>
+			<div class="cta">
+				<a href="/career"><button type="button" class="btn btn-outline-primary cta-button">My Career</button></a>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}

@@ -1,0 +1,88 @@
+.pic-container {
+	width:150px;
+}
+
+.pic {
+	border-radius: 50%;
+    width: 150px;
+	margin: auto;
+	margin-top: 12px
+}
+
+.details {
+	padding-top: 16px;
+	text-align: center;
+}
+
+.name {
+	font-size: 32px;
+}
+
+.summary {
+	font-size: 24px;
+}
+
+.profiles-container {
+	width: 100%;
+	margin: auto;
+	margin-top: 12px;
+	text-align: center;
+}
+
+.btn-linkedin {
+	  background: #0E76A8;
+	  border-radius: 0;
+	  color: #fff;
+	  border-width: 1px;
+	  border-style: solid;
+	  border-color: #084461;
+	}
+	.btn-linkedin:link, .btn-linkedin:visited {
+	  color: #fff;
+	}
+	.btn-linkedin:active, .btn-linkedin:hover {
+	  background: #084461;
+	  color: #fff;
+	}
+
+.about-me {
+	margin-top: 12px;
+	margin-left: 30px;
+	font-size: 22px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.about-me-blurb {
+	margin-top: 10px;
+	font-size: 16px;
+
+}
+
+.cta {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 8px;
+}
+
+.cta-button {
+	width: 100%;
+}
+
+@media only screen and (max-width: 984px) {
+  .central-panel {
+    height: 494px;
+  }
+}
+
+@media only screen and (max-width: 848px) {
+  .central-panel {
+    height: 528px;
+  }
+}
+
+@media only screen and (max-width: 848px) {
+  .central-panel {
+    height: 1200px;
+  }
+}

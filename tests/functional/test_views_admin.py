@@ -101,3 +101,19 @@ def test_remove_job(logged_in_client):
 		job_id = current_user.jobs[0].oid
 		response = logged_in_client.post(f'/remove_job?job_id={job_id}', follow_redirects=True)
 		assert current_user.jobs == []
+
+def test_add_company(logged_in_client, user_with_job):
+	"""
+	GIVEN a logged in user
+	WHEN I add a company
+	THEN that company appears in the add job form
+	"""
+	with logged_in_client as c:
+		response = logged_in_client.get('/add_job')
+		assert b'spaceX' not in response.data
+		response2 = logged_in_client.post('/add_company', data = {'name': 'spaceX'})
+		response3 = logged_in_client.get('/add_job')
+		assert b'spaceX' in response3.data
+
+
+

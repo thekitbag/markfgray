@@ -68,13 +68,17 @@ def user_with_job():
     c.save()
     j.company = c
     j.start_date = datetime(2018, 1, 1, 0, 0 ,0)
-    j.end_date =  datetime(2020,1,1,0,0,0)
+    j.end_date =  datetime(2020, 1, 1, 0, 0, 0)
     j.job_title = 'CEO'
     j.description = 'I ran the comapny from day to day and grew it by 1000% in the first year'
+    j.achievements = 'smashed all my targets \
+    hired lots of people \
+    made all the prcocesses better'
     u.add_job(j)
     u.save()
     yield u
     u.delete()
+    c.delete()
 
 @pytest.fixture(scope='function')
 def logged_in_client(user_with_job):
@@ -90,6 +94,8 @@ def logged_in_client(user_with_job):
 
     yield testing_client  # this is where the testing happens!
 
+    c = db.connect('test_markfaradaygray')
+    c.drop_database('test_markfaradaygray')
     ctx.pop()
     
 

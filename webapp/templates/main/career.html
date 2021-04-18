@@ -5,44 +5,63 @@
 {% endblock moreScripts %}
 
 {% block app_content %}
-<div class="row">
-	<div class="col-12 text-center">
-		<h4>Career Journey</h4>
-		<h6>Click a tile to read more</h6>
-	</div>
-</div>
-<div class="row">
-	{% for job in jobs %}
-	  <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
-	  	<div class="job-tile border text-center mx-auto" data-toggle="modal" data-target="#details {{job.oid}}">
-			<div class="job-details job-title mt-2">{{job.job_title}}</div>
-			<div class="job-details job-company">{{job.company.name}}</div>
-			<div class="job-details job-dates">
-				<div class="job-details job-start-date">{{job.start_date.date().strftime("%B %Y")}} to </div>
-				<div class="job-details job-end-date">{{job.end_date.date().strftime("%B %Y")}}</div>
+
+<div class="container central-panel mx-auto">
+	<div class="row">
+		<div class="col-12 text-center">
+			<div class="top-panel">
+				<h4>Career Journey</h4>
+				<h6>Over the past 11 years I've held a few different roles across three companies. Click on a tile to find
+				a little more about each</h6>
 			</div>
 		</div>
-	  </div>
-	{% endfor %} 
-</div>
-<div class="row">
-  {% for job in jobs %}
-	<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="details {{job.oid}}">
-	  <div class="modal-dialog modal-lg">
-	  	<div class="modal-content">
-		  	<div class="modal-header">
-		  		<h4 class="modal-title">{{job.job_title}} at {{job.company.name}}</h4>
-		  		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          	<span aria-hidden="true">×</span>
-	        	</button>
-		  	</div>
-		    <div class="modal-body">
-		      {{job.description}}
-		    </div>
-		</div>
-  	  </div>
 	</div>
+	<div class="row">
+		{% for job in jobs %}
+		  <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+		  	<div class="job-tile border text-center mx-auto" data-toggle="modal" data-target="#details {{job.oid}}">
+				<div class="job-details job-title mt-2">{{job.job_title}}</div>
+				<img src="{{job.company.img_url}}" width="100" alt="gamesys.png">
+				<div class="job-details job-dates">
+					<div class="job-details job-start-date">{{job.start_date.date().strftime("%B %Y")}} to </div>
+					<div class="job-details job-end-date">{{job.end_date.date().strftime("%B %Y")}}</div>
+				</div>
+			</div>
+		  </div>
+		{% endfor %} 
+	</div>
+	<div class="row">
+	  {% for job in jobs %}
+		<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="details {{job.oid}}">
+		  <div class="modal-dialog modal-lg">
+		  	<div class="modal-content">
+			  	<div class="modal-header">
+			  		<h4 class="modal-title">{{job.job_title}} at {{job.company.name}}</h4>
+			  		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          	<span aria-hidden="true">×</span>
+		        	</button>
+			  	</div>
+			    <div class="modal-body">
+			    	<div class="description">
+			    		<h5>Job Desciption</h5>
+			    		{{job.description}}
+			    	</div>
+			    	<div class="achievements">
+			    		<h5>Achievements</h5>
+			    		<ul>
+			    			{% set achievements = job.achievements.splitlines() %}
+			    			{% for achievement in achievements %}
+			    				<li>{{achievement}}</li>
+			    			{% endfor %}
+			    		</ul>
+			    	</div>
+			      
+			    </div>
+			</div>
+	  	  </div>
+		</div>
   {% endfor %}
+  </div>
 </div>
 
 {% endblock %}

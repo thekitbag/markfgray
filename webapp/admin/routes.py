@@ -33,6 +33,7 @@ def add_job():
 			job.end_date = form.end_date.data
 			job.job_title = form.job_title.data
 			job.description = form.description.data
+			job.achievements = form.achievements.data
 			current_user.add_job(job)
 			current_user.save()
 			return redirect(url_for('admin.jobs'))
@@ -58,11 +59,13 @@ def edit_job(job_id):
 	form = JobForm()
 	if request.method == 'POST':
 		if form.validate_on_submit:
-			job.company = form.company.data
+			company = Company.objects(name=form.company.data).first()
+			job.company = company
 			job.start_date = form.start_date.data
 			job.end_date = form.end_date.data
 			job.job_title = form.job_title.data
 			job.description = form.description.data
+			job.achievements = form.achievements.data
 			current_user.save()
 			return redirect(url_for('admin.jobs'))
 
@@ -71,6 +74,7 @@ def edit_job(job_id):
 	form.start_date.data = job.start_date
 	form.end_date.data = job.end_date
 	form.description.data = job.description
+	form.achievements.data = job.achievements
 
 	return render_template('admin/edit_job.html', form=form, job=job)
 

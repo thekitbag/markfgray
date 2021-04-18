@@ -1,4 +1,4 @@
-from webapp.models import User, Job
+from webapp.models import User, Job, Company
 from werkzeug.security import generate_password_hash
 from datetime import datetime
 
@@ -75,6 +75,15 @@ def test_remove_job(user_with_job):
 	job = user_with_job.jobs[0]
 	user_with_job.remove_job(job)
 	assert len(user_with_job.jobs) == 0
+
+def test_new_job_new_company(new_user):
+	j = Job()
+	c = Company()
+	c.name = 'Facebook'
+	j.company = c
+	new_user.add_job(j)
+	assert new_user.jobs[0].company.name == 'Facebook'
+
 
 
 
