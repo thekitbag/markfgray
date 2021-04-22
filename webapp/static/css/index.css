@@ -68,21 +68,3 @@
 .cta-button {
 	width: 100%;
 }
-
-@media only screen and (max-width: 984px) {
-  .central-panel {
-    height: 494px;
-  }
-}
-
-@media only screen and (max-width: 848px) {
-  .central-panel {
-    height: 528px;
-  }
-}
-
-@media only screen and (max-width: 848px) {
-  .central-panel {
-    height: 1200px;
-  }
-}
