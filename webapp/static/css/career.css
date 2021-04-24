@@ -51,6 +51,8 @@ img {
     left: 0;
     right: 0;
     margin: auto;
+    min-width: 70%;
+    min-height:70%;
 }
 
 .job-dates {
