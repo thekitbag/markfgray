@@ -21,11 +21,12 @@ def career():
 
 @bp.route('/skills')
 def skills():
-	soft_skills = 'stakeholder management, presenting, written communication, verbal communication'
-	hard_skills = 'discovery, delivery, story mapping, user testing, AB testing'
+	skills = 'stakeholder management, presenting, written communication, verbal communication, discovery, delivery, story mapping, \
+			user testing, AB_testing, customer interviews, product strategy, vision, opportunity/solution tree, assumptions mapping,\
+			HTML, CSS, JavaScript, Python, SQL, Git, web analytics'
 
 	def get_wordcloud(text, colormap):
-		pil_img = WordCloud(height=400, random_state=1, background_color='navy', colormap=colormap).generate(text=text).to_image()
+		pil_img = WordCloud(height=600, width=1000, random_state=1, colormap=colormap).generate(text=text).to_image()
 		img = io.BytesIO()
 		pil_img.save(img, "PNG")
 		img.seek(0)
@@ -34,10 +35,9 @@ def skills():
 
 	
 	
-	soft_skills_cloud = get_wordcloud(soft_skills, 'rainbow')
-	hard_skills_cloud = get_wordcloud(hard_skills, 'magma_r')
+	skills_cloud = get_wordcloud(skills, 'BuPu_r')
 
-	return render_template('main/skills.html', title='Skills', soft_skills_cloud=soft_skills_cloud, hard_skills_cloud=hard_skills_cloud)
+	return render_template('main/skills.html', title='Skills', skills_cloud=skills_cloud)
 
 @bp.route('/tools')
 def tools():

@@ -1,4 +1,13 @@
-.skilltype-header {
-	text-align: center;
-	margin: 6px 0px 12px 0px;
+.central-panel {
+	width: 90%;
+	top: 0;
+	width: fit-content;
+}
+
+
+.wordcloud {
+	width:100%;
+	min-width: 300px;
+	margin-top: 24px;
+	min-height: 400px;
 }
