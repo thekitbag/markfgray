@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block moreScripts %}
+{% endblock moreScripts %}
+
+{% block app_content %}
+
+<div class="container central-panel mx-auto">
+	<div class="row">
+		<a href="/blog"><button type="button" class="btn btn-outline-primary cta-button track m-3" id='abc' trackname='My Career'>Back</button></a>
+		<div class="col-12 text-center mb-2 mt">
+			<h1>{{blogpost.title}}</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 text-center mb-2 mt-2">
+			<h5>{{blogpost.post_date.strftime("%A %d %B")}}</h5>
+		</div>
+	</div>
+	<div class="row">
+		{% for paragraph in blogpost.paragraphs %}
+			<div class="col-12 mb-2 mt-2">
+				<h5>{{paragraph}}</h5>
+			</div>
+		{% endfor %}
+	</div>
+	
+</div>
+
+{% endblock %}

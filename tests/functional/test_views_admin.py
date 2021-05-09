@@ -1,6 +1,7 @@
 from flask_login import current_user
 from datetime import datetime
 from flask import request, url_for
+from flask_login import current_user
 
 def test_new_blog_post_page(function_test_client, new_user):
 	"""
@@ -114,6 +115,30 @@ def test_add_company(logged_in_client, user_with_job):
 		response2 = logged_in_client.post('/add_company', data = {'name': 'spaceX'})
 		response3 = logged_in_client.get('/add_job')
 		assert b'spaceX' in response3.data
+
+
+def test_new_blog_post(mark, function_test_client):
+	"""
+	Given I am logged in as Mark
+	When I try to create a new post
+	Then I should see the content of that post on the blog page
+	"""
+	with function_test_client as c:
+		response0 = function_test_client.get('/blog')
+		assert b'No posts yet. First post must be just around the corner' in response0.data
+		response = function_test_client.post('/auth/login',
+									data=dict(username='mark', password='password1'), follow_redirects=True) 
+		assert response.status_code == 200
+		assert current_user.is_authenticated == True
+		response2 = function_test_client.post('/new_blog_post', data = {'title': 'Epic Poast',
+																	 'body': 'Unbelieavbly good content'}, follow_redirects=True)
+		assert response2.status_code == 200
+		response3 = function_test_client.get('/posts')
+		assert b'Epic Poast' in response3.data
+		response4 = function_test_client.get('/blog')
+		assert b'Epic Poast' in response4.data
+
+
 
 
 

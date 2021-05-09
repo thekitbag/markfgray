@@ -2,7 +2,7 @@ import pytest
 import config
 from datetime import datetime
 from flask.testing import FlaskClient
-from webapp.models import User, Job, Company
+from webapp.models import User, Job, Company, Post
 from webapp import create_app, db
 
 
@@ -25,6 +25,15 @@ def new_user_session():
     user = User(username="sally function user")
     user.set_password('password1')
     return user
+
+
+@pytest.fixture(scope='function')
+def mark():
+    user = User(username="mark")
+    user.set_password('password1')
+    user.save()
+    yield user
+    user.delete()
 
 
 @pytest.fixture(scope='module')

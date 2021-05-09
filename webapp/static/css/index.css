@@ -1,3 +1,7 @@
+.central-panel {
+	padding-bottom: 60px;
+}
+
 .pic-container {
 	width:150px;
 }
@@ -60,7 +64,7 @@
 }
 
 .cta {
-    width: 90%;
+    width: 96%;
     margin: auto;
     margin-bottom: 8px;
 }

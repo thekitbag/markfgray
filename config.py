@@ -16,6 +16,7 @@ class DevelopmentConfig(Config):
     'port': 27017
 }
     USERNAME = 'mfg'
+    MIXPANEL_ID = '801bb0de9db704f130e05196ab535bd1'
 
 class ProductionConfig(Config):
     DEBUG = False
@@ -25,6 +26,7 @@ class ProductionConfig(Config):
     REMEMBER_COOKIE_HTTPONLY = True
     MONGODB_HOST = os.environ.get('MONGODB_URI')
     USERNAME = os.environ.get('USERNAME') or 'mfg'
+    MIXPANEL_ID = 'b5cc2c3e2c77a3ae9293b1b4184b55e7'
 
 class TestConfig(Config):
     TESTING = True

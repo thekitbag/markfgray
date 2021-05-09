@@ -14,9 +14,9 @@ def test_home_page(test_client):
 	
 	response = test_client.get('/')
 	assert response.status_code == 200
-	assert b"<h1>Home</h1>" in response.data
-	assert b"<h4>Coming soon...</h4>" in response.data
-	assert b'<nav class="navbar navbar-expand-lg navbar-light bg-light">' in response.data
+	assert b"Mark Gray</div>" in response.data
+	assert b"Senior Product Manager in Southampton, UK</div>" in response.data
+	assert b"navbar navbar-expand-lg" in response.data
 
 def test_admin_page(test_client):
 	"""
@@ -29,10 +29,10 @@ def test_admin_page(test_client):
 	assert b'<h1>Admin</h1>' in response.data
 	assert b">Register</a>" in response.data
 	assert b">Login</a>" in response.data
-	assert b">New Blog Post</a>" in response.data
-	assert b">Edit Jobs</a>" in response.data
+	assert b">Blog Posts</a>" in response.data
+	assert b">Jobs</a>" in response.data
 
-def test_blog_page(test_client):
+def test_blog_page(test_client, mark):
 	"""
 	GIVEN a Flask application configured for testing
 	WHEN I try to load the blog page
@@ -40,8 +40,9 @@ def test_blog_page(test_client):
 	"""
 	response = test_client.get('/blog')
 	assert response.status_code == 200
-	assert b'<h1>Blog</h1>' in response.data
-	assert b"<h4>Coming soon...</h4>" in response.data
+	assert b"<h1>Blog</h1>" in response.data
+	print(response.data)
+	assert b"No posts yet. First post must be just around the corner" in response.data
 
 def test_login_page(test_client):
 	"""
@@ -82,8 +83,6 @@ def test_skills_page(test_client):
 	"""
 	response = test_client.get('/skills')
 	assert response.status_code == 200
-	assert b"<h1>Skills</h1>" in response.data
-	assert b"<h4>Coming soon...</h4>" in response.data
 
 def test_tools_page(test_client):
 	"""
@@ -93,7 +92,6 @@ def test_tools_page(test_client):
 	"""
 	response = test_client.get('/tools')
 	assert response.status_code == 200
-	assert b"<h1>Tools</h1>" in response.data
-	assert b"<h4>Coming soon...</h4>" in response.data
+	assert b"id=\"aha-logo\">" in response.data
 
 

@@ -1,4 +1,4 @@
-from webapp.models import User, Job, Company
+from webapp.models import User, Job, Company, Post
 from werkzeug.security import generate_password_hash
 from datetime import datetime
 
@@ -77,12 +77,30 @@ def test_remove_job(user_with_job):
 	assert len(user_with_job.jobs) == 0
 
 def test_new_job_new_company(new_user):
+	"""
+	GIVEN a user
+	WHEN user adds a new job at a new company
+	THEN that jobs should appear in user's jobs
+	"""
 	j = Job()
 	c = Company()
 	c.name = 'Facebook'
 	j.company = c
 	new_user.add_job(j)
 	assert new_user.jobs[0].company.name == 'Facebook'
+
+def test_new_blog_post(new_user):
+	"""
+	GIVEN a user
+	WHEN that user makes a new post
+	THEN post should appear un user's posts
+	"""
+	assert new_user.posts == []
+	p = Post()
+	p.title = 'Hello World'
+	p.body = 'This is my first blog post, I can\'t wait to start talking to the world about myself'
+	new_user.post(p)
+	assert new_user.posts == [p]
 
 
 

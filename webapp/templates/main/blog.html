@@ -5,7 +5,30 @@
 
 {% block app_content %}
 
-<h1>Blog</h1>
-<h4>Coming soon...</h4>
+
+<div class="container central-panel mx-auto">
+	<div class="row">
+		<div class="col-12 text-center mb-2 mt-2">
+			<h1>Blog</h1>
+		</div>
+	</div>
+	{% if posts != [] %}
+		<div class="row">
+			{% for post in posts %}
+				<div class="col-12">
+					{% include 'main/_post_preview.html' %}
+				</div>
+			{% endfor %}
+		</div>
+	{% else %}
+		<div class="row">
+			<div class="col-12">
+				<h2>No posts yet. First post must be just around the corner</h2>
+			</div>
+		</div>
+	{% endif %}
+</div>
+
+
 
 {% endblock %}

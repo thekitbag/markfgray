@@ -1,6 +1,7 @@
 from flask import current_app, render_template, url_for, redirect, flash, jsonify, request
 from webapp.models import User
 from webapp.main import bp
+from webapp.main.blog_post_formatter import BlogPost
 from wordcloud import WordCloud
 import base64
 import io
@@ -23,7 +24,7 @@ def career():
 def skills():
 	skills = 'stakeholder management, presenting, written communication, verbal communication, discovery, delivery, story mapping, \
 			user testing, AB_testing, customer interviews, product strategy, vision, opportunity/solution tree, assumptions mapping,\
-			HTML, CSS, JavaScript, Python, SQL, Git, web analytics'
+			HTML, CSS, JavaScript, Python, SQL, Git, web analytics, Scrum, Kanban, VMOST, Agile, OKRs, CSPO'
 
 	def get_wordcloud(text, colormap):
 		pil_img = WordCloud(height=600, width=1000, random_state=1, colormap=colormap).generate(text=text).to_image()
@@ -49,7 +50,20 @@ def personal():
 
 @bp.route('/blog')
 def blog():
-	return render_template('main/blog.html', title='Blog')
+	username = current_app.config['USERNAME']
+	user = User.objects(username=username).first()
+	posts = user.posts
+	print(posts)
+	posts.sort(key=lambda x: x.post_date, reverse=True)
+	return render_template('main/blog.html', title='Blog', posts=posts)
+
+@bp.route('/post/<post_id>')
+def post(post_id):
+	username = current_app.config['USERNAME']
+	user = User.objects(username=username).first()
+	post_object = [i for i in user.posts if str(i.oid) == str(post_id)][0]
+	blogpost = BlogPost(post_object)
+	return render_template('main/blog_post.html', blogpost=blogpost)
 
 
 

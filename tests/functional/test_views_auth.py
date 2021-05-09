@@ -34,7 +34,7 @@ def test_login(function_test_client, new_user):
 		assert b'<h1>Admin</h1>' in response_3.data
 		assert b">Register</a>" in response_3.data
 		assert b">Login</a>" in response_3.data
-		assert b">New Blog Post</a>" in response_3.data
+		assert b">Blog Posts</a>" in response_3.data
 
 def test_register(new_user, function_test_client):
 	"""

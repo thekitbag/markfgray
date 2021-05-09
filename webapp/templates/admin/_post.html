@@ -1,0 +1,8 @@
+<div class="container" id="post-{{post.oid}}">
+	<h3>{{post.title}}</h3>
+	<p>{{post.body}}</p>
+	<a href="/edit_blog_post/{{post.oid}}" class="btn btn-primary">Edit</a>
+    <form action="/remove_post?post_id={{post.oid}}" method="post">
+	    <input type="submit" value="Remove" class="btn btn-danger">
+	</form>
+</div>

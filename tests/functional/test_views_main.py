@@ -9,8 +9,7 @@ def test_career_page_basic(test_client, user_with_job):
 	
 	response = test_client.get('/career')
 	assert response.status_code == 200
-	assert b"<h4>Career Journey</h4>" in response.data
-	assert b"<h6>Click a tile to read more</h6>" in response.data
+	assert b"Over the past 11 years I've held a few different roles across three companies"in response.data
 
 def test_career_page_new_company_new_job(logged_in_client):
 	"""GIVEN a logged in user

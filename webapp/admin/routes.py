@@ -1,17 +1,13 @@
 from flask import render_template, redirect, url_for, request
 from flask_login import current_user, login_required
 from webapp.admin import bp
-from webapp.admin.forms import JobForm, CompanyForm
-from webapp.models import Job, Company
+from webapp.admin.forms import JobForm, CompanyForm, PostForm
+from webapp.models import Job, Company, Post
 
 @bp.route('/admin')
 def admin():
 	return render_template('admin/admin.html')
 
-@bp.route('/new_blog_post', methods=['GET', 'POST'])
-@login_required
-def new_blog_post():
-	return render_template('admin/new_blog_post.html')
 
 @bp.route('/jobs')
 @login_required
@@ -93,6 +89,51 @@ def add_company():
 			return redirect(url_for('admin.jobs'))
 	
 	return render_template('admin/add_company.html', form=form)
+
+@bp.route('/posts', methods=['GET', 'POST'])
+@login_required
+def posts():
+	posts = current_user.posts
+	return render_template('admin/posts.html', posts=posts)
+
+@bp.route('/new_blog_post', methods=['GET', 'POST'])
+@login_required
+def new_blog_post():
+	form = PostForm()
+	if form.validate_on_submit():
+		post = Post()
+		post.title = form.title.data
+		post.body = form.body.data
+		current_user.post(post)
+		current_user.save()
+		return redirect(url_for('admin.posts'))
+	return render_template('admin/new_blog_post.html', form=form)
+
+@bp.route('/edit_blog_post/<post_oid>', methods=['GET', 'POST'])
+@login_required
+def edit_blog_post(post_oid):
+	bp = [post for post in current_user.posts if str(post_oid) == str(post.oid)][0]
+	form = PostForm()
+
+	if form.validate_on_submit():
+		bp.title = form.title.data
+		bp.body = form.body.data
+		current_user.save()
+		return redirect(url_for('admin.posts'))
+
+	form.title.data = bp.title
+	form.body.data = bp.body
+
+	return render_template('admin/edit_post.html', form=form, post=bp)
+
+@bp.route('/remove_post', methods=['POST'])
+@login_required
+def remove_post():
+	post_id = request.args.get('post_id')
+	p = [post for post in current_user.posts if str(post.oid) == str(post_id)][0]
+	current_user.remove_post(p)
+	current_user.save()
+	return redirect(url_for('admin.posts'))
 
 
 

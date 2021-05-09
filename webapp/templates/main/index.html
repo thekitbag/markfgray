@@ -2,6 +2,7 @@
 
 {% block moreScripts %}
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/index.css') }}">
+<script src="../static/js/main.js"></script>
 {% endblock moreScripts %}
 
 {% block app_content %}
@@ -17,7 +18,7 @@
 				<div class="summary">Senior Product Manager in Southampton, UK</div>
 			</div>
 			<div class="container profiles-container">
-				<a href="https://www.linkedin.com/in/mark-gray-79b40834/" title="LinkedIn" class="btn btn-linkedin btn-lg" target="_blank"><i class="fa fa-linkedin fa-fw"></i> LinkedIn</a>
+				<a href="https://www.linkedin.com/in/mark-gray-79b40834/" title="LinkedIn" class="btn btn-linkedin btn-lg track" target="_blank" trackname="LinkedIn"><i class="fa fa-linkedin fa-fw"></i> LinkedIn</a>
 			</div>		
 		</div>
 		<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -27,10 +28,10 @@
 				<p>I build this website as a place to write about my career and the world of product management but primarily as a playground for testing out my development and design skills. If you are from a tech background, bear in mind that I am not. If you are from a design background, I can only apologise.</p>
 			</div>
 			<div class="cta">
-				<a href="https://github.com/thekitbag/markfgray" target="_blank"><button type="button" class="btn btn-outline-info cta-button">View Code on Github</button></a>
+				<a href="https://github.com/thekitbag/markfgray" target="_blank"><button type="button" class="btn btn-outline-info cta-button track" trackname='View Code'>View Code on Github</button></a>
 			</div>
 			<div class="cta">
-				<a href="/career"><button type="button" class="btn btn-outline-primary cta-button">My Career</button></a>
+				<a href="/career"><button type="button" class="btn btn-outline-primary cta-button track" id='abc' trackname='My Career'>My Career</button></a>
 			</div>
 		</div>
 	</div>
