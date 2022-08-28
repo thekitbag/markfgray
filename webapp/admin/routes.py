@@ -5,6 +5,7 @@ from webapp.admin.forms import JobForm, CompanyForm, PostForm
 from webapp.models import Job, Company, Post
 
 @bp.route('/admin')
+@login_required
 def admin():
 	return render_template('admin/admin.html')
 
@@ -14,6 +15,12 @@ def admin():
 def jobs():
 	my_jobs = current_user.jobs
 	return render_template('admin/jobs.html', jobs=my_jobs)
+
+@bp.route('/companies')
+@login_required
+def companies():
+	companies = Company.objects.all()
+	return render_template('admin/companies.html', companies=companies)
 
 @bp.route('/add_job', methods=['GET', 'POST'])
 @login_required
@@ -33,7 +40,7 @@ def add_job():
 			current_user.add_job(job)
 			current_user.save()
 			return redirect(url_for('admin.jobs'))
-	
+
 	return render_template('admin/add_job.html', form=form)
 
 @bp.route('/remove_job', methods=['POST'])
@@ -74,6 +81,29 @@ def edit_job(job_id):
 
 	return render_template('admin/edit_job.html', form=form, job=job)
 
+@bp.route('/edit_company/<company_id>', methods=['GET', 'POST'])
+@login_required
+def edit_company(company_id):
+	company_list = [company for company in Company.objects.all() if str(company.oid) == str(company_id)]
+	company = company_list[0]
+	form = CompanyForm()
+	if request.method == 'POST':
+		if form.validate_on_submit:
+			company = Company.objects(oid=company_id).first()
+			company.name = form.name.data
+			company.description = form.description.data
+			company.img_url = form.img_url.data
+			company.website = form.website_url.data
+			company.save()
+			return redirect(url_for('admin.companies'))
+
+	form.name.data = company.name
+	form.description.data = company.description
+	form.img_url.data = company.img_url
+	form.website_url.data = company.website
+
+	return render_template('admin/edit_company.html', form=form, company=company)
+
 @bp.route('/add_company', methods=['GET', 'POST'])
 @login_required
 def add_company():
@@ -85,9 +115,10 @@ def add_company():
 			company.name = form.name.data
 			company.description = form.description.data
 			company.img_url = form.img_url.data
+			company.website = form.website_url.data
 			company.save()
 			return redirect(url_for('admin.jobs'))
-	
+
 	return render_template('admin/add_company.html', form=form)
 
 @bp.route('/posts', methods=['GET', 'POST'])
@@ -134,6 +165,3 @@ def remove_post():
 	current_user.remove_post(p)
 	current_user.save()
 	return redirect(url_for('admin.posts'))
-
-
-

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block moreScripts %}
+{% endblock moreScripts %}
+
+{% block app_content %}
+
+<h1>Companies</h1>
+{% if companies %}
+<h4>Your companies are below, click on one to edit description</h4>
+<div class="row mt-2">
+	{% for company in companies %}
+		{% include 'admin/_company.html' %}
+	{% endfor %}
+</div>
+{% else %}
+<h4>You have no companies saved</h4>
+{% endif %}
+<br>
+<a href="{{url_for('admin.add_company')}}">Add Company</a>
+
+{% endblock %}

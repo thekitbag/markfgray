@@ -30,8 +30,8 @@ class CompanyForm(FlaskForm):
 	name = StringField('Company Name', validators=[DataRequired()])
 	description = StringField('Company Description')
 	img_url = StringField('Company Image URL', validators=[DataRequired()])
+	website_url = StringField('Company Website URL')
 
 class PostForm(FlaskForm):
 	title = StringField('Post Title', validators=[DataRequired()])
 	body = TextAreaField('Post Body', validators=[DataRequired()])
-

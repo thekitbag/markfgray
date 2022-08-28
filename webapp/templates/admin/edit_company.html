@@ -5,27 +5,27 @@
 
 
 <div class="container">
-	<form action="{{url_for('admin.add_company')}}" method="post" class="form" role="form">
+	<form action="{{url_for('admin.edit_company', company_id=company.oid)}}" method="post" class="form" role="form">
 		{{ form.hidden_tag() }}
 	 <d1>
-		{{ wtf.form_field(form.name, class='form-control') }}
+		{{ wtf.form_field(form.name, class_='form-control') }}
 			{% for error in form.name.errors %}
 			<div class="alert alert-danger" role="alert">{{ error }}</div>
 			{% endfor %}
-		{{ wtf.form_field(form.description, class='form-control') }}
+		{{ wtf.form_field(form.description, class_='form-control') }}
 			{% for error in form.description.errors %}
 			<div class="alert alert-danger" role="alert">{{ error }}</div>
 			{% endfor %}
-		{{ wtf.form_field(form.img_url, class='form-control') }}
+		{{ wtf.form_field(form.img_url, class_='form-control') }}
 			{% for error in form.img_url.errors %}
 			<div class="alert alert-danger" role="alert">{{ error }}</div>
 			{% endfor %}
-			{{ wtf.form_field(form.website_url, class='form-control') }}
-				{% for error in form.website_url.errors %}
-				<div class="alert alert-danger" role="alert">{{ error }}</div>
-				{% endfor %}
+		{{ wtf.form_field(form.website_url, class_='form-control') }}
+			{% for error in form.website_url.errors %}
+			<div class="alert alert-danger" role="alert">{{ error }}</div>
+			{% endfor %}
 	 </d1>
-	 <a cat="Add" title="Add"><input type=submit class='btn btn-dark text-white btn-block mt-2'></a>
+	 <a><input type=submit class='btn btn-dark text-white btn-block mt-2'></a>
 	</form>
 </div>
 {% endblock %}

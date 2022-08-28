@@ -16,9 +16,12 @@ class Post(db.EmbeddedDocument):
 	post_date = db.DateTimeField(required=True, default=datetime.today(),)
 
 class Company(db.Document):
+	oid = db.ObjectIdField(required=True, default=ObjectId,
+                    primary_key=True, sparse=True)
 	name = db.StringField()
 	description = db.StringField()
 	img_url = db.StringField()
+	website = db.StringField()
 
 class Job(db.EmbeddedDocument):
 	oid = db.ObjectIdField(required=True, default=ObjectId,
@@ -57,4 +60,3 @@ class User(db.Document, UserMixin):
 
 	def remove_post(self, post):
 		self.posts.remove(post)
-

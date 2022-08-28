@@ -5,7 +5,7 @@ from webapp.main.blog_post_formatter import BlogPost
 from wordcloud import WordCloud
 import base64
 import io
-import config 
+import config
 
 @bp.route('/')
 @bp.route('/index')
@@ -24,7 +24,7 @@ def career():
 def skills():
 	skills = 'stakeholder management, presenting, written communication, verbal communication, discovery, delivery, story mapping, \
 			user testing, AB_testing, customer interviews, product strategy, vision, opportunity/solution tree, assumptions mapping,\
-			HTML, CSS, JavaScript, Python, SQL, Git, web analytics, Scrum, Kanban, VMOST, Agile, OKRs, CSPO'
+			HTML, CSS, JavaScript, Python, SQL, Git, web analytics, Scrum, Kanban, VMOST, Agile, OKRs, CSPO, Northstar'
 
 	def get_wordcloud(text, colormap):
 		pil_img = WordCloud(height=600, width=1000, random_state=1, colormap=colormap).generate(text=text).to_image()
@@ -34,8 +34,8 @@ def skills():
 		img_b64 = base64.b64encode(img.getvalue()).decode()
 		return img_b64
 
-	
-	
+
+
 	skills_cloud = get_wordcloud(skills, 'BuPu_r')
 
 	return render_template('main/skills.html', title='Skills', skills_cloud=skills_cloud)
@@ -64,10 +64,3 @@ def post(post_id):
 	post_object = [i for i in user.posts if str(i.oid) == str(post_id)][0]
 	blogpost = BlogPost(post_object)
 	return render_template('main/blog_post.html', blogpost=blogpost)
-
-
-
-
-
-
-

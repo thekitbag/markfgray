@@ -4,13 +4,10 @@ from flask_mongoengine import MongoEngine
 from flask_login import LoginManager
 from config import Config
 
-
-
 bootstrap = Bootstrap()
 login = LoginManager()
 db = MongoEngine()
 
-        
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
@@ -30,4 +27,3 @@ def create_app(config_class=Config):
     return app
 
 from webapp import models
-

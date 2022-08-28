@@ -7,14 +7,12 @@
 {% block app_content %}
 
 <h1>Admin</h1>
-<a href="{{url_for('auth.register')}}">Register</a>
-<a href="{{url_for('auth.login')}}">Login</a>
 <br>
 <br>
 <a href="{{url_for('admin.jobs')}}">Jobs</a>
 <br>
-<a href="{{url_for('admin.add_company')}}">Add Compamy</a>
-<br>
 <a href="{{url_for('admin.posts')}}">Blog Posts</a>
+<br>
+<a href="{{url_for('admin.companies')}}">Companies</a>
 
 {% endblock %}

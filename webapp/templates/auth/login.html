@@ -25,6 +25,7 @@
           {% for error in form.password.errors %}
           <div class="alert alert-danger" role="alert">{{ error }}</div>
           {% endfor %}
+        {{wtf.form_field(form.secret_number, class='form-control')}}
        </d1>
        <a cat="Login" title="Login"><input type=submit class='btn btn-dark text-white btn-block mt-2'></a>
       </form>

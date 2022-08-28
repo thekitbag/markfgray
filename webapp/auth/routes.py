@@ -1,3 +1,4 @@
+import os
 from flask import render_template, request, url_for, redirect, flash, jsonify
 from flask_login import current_user, login_user, logout_user
 from webapp.models import User
@@ -8,24 +9,13 @@ from webapp.auth.forms import RegistrationForm, LoginForm
 def admin():
 	return render_template('auth/admin.html', title='Admin')
 
-@bp.route('/register', methods=['GET', 'POST'])
-def register():
-	form = RegistrationForm()
-
-	if form.validate_on_submit():
-		user = User(username=form.username.data.lower())
-		user.set_password(form.password.data)
-		user.save()
-		login_user(user)
-		return redirect(url_for('admin.admin'))
-	else:
-		return render_template('auth/register.html', form=form)
-
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
 	form = LoginForm()
 
 	if form.validate_on_submit():
+		if form.secret_number.data != os.environ.get('SECRET_NUMBER'):
+			return redirect(url_for('main.index'))
 		username = form.username.data.lower()
 		user = User.objects(username=username).first()
 
