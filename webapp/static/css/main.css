@@ -11,7 +11,7 @@
 .section-two {
 	height: 300px;
 	width: 100%;
-	background-color: whitesmoke;
+	background-color: lightgray;
 }
 
 .central-panel {
@@ -27,4 +27,8 @@
 
 .top-panel {
 	margin: 10px 0px 10px 0px;
+}
+
+.form {
+	position: relative;
 }
