@@ -71,8 +71,8 @@ def edit_job(job_id):
 			job.achievements = form.achievements.data
 			current_user.save()
 			return redirect(url_for('admin.jobs'))
-
-	form.company.data = job.company
+	print(form.company.__dict__)
+	form.company.data = job.company.name
 	form.job_title.data = job.job_title
 	form.start_date.data = job.start_date
 	form.end_date.data = job.end_date
