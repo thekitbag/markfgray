@@ -6,6 +6,7 @@ from wordcloud import WordCloud
 import base64
 import io
 import config
+from datetime import datetime
 
 @bp.route('/')
 @bp.route('/index')
@@ -18,7 +19,8 @@ def career():
 	user = User.objects(username=username).first()
 	jobs = user.jobs
 	jobs.sort(key=lambda x: x.start_date, reverse=True)
-	return render_template('main/career.html', title='Career Journey', jobs=jobs)
+	today = datetime.today()
+	return render_template('main/career.html', title='Career Journey', jobs=jobs, today=today)
 
 @bp.route('/skills')
 def skills():

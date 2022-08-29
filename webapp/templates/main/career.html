@@ -26,7 +26,11 @@
 				</div>
 				<div class="job-details job-dates">
 					<div class="job-details job-start-date">{{job.start_date.date().strftime("%B %Y")}} to </div>
-					<div class="job-details job-end-date">{{job.end_date.date().strftime("%B %Y")}}</div>
+					{% if job.end_date > today %}
+						<div class="job-details job-end-date">Current</div>
+					{% else %}
+						<div class="job-details job-end-date">{{job.end_date.date().strftime("%B %Y")}}</div>				
+					{% endif %}
 				</div>
 			</div>
 		  </div>
